@@ -51,9 +51,7 @@ fi
 
 # Run syncdb/migrate/load_initial_data/update_index
 su - $DEV_USER -c "$PYTHON $PROJECT_DIR/manage.py migrate --noinput && \
-                   $PYTHON $PROJECT_DIR/manage.py loaddata base && \
-                   $PYTHON $PROJECT_DIR/manage.py loaddata home && \
-                   $PYTHON $PROJECT_DIR/manage.py loaddata catalog && \
+                   $PYTHON $PROJECT_DIR/manage.py loaddata $PROJECT_DIR/initial_data.json && \
                    $PYTHON $PROJECT_DIR/manage.py update_index"
 
 
