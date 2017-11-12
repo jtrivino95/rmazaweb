@@ -2,4 +2,5 @@
 *.sqlite3
 *.pyc
 media/
+rmazaweb/settings/production.py
 TODO.txt
