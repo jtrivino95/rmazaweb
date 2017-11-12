@@ -1,0 +1,158 @@
+{% extends 'base/base.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+<!-- Modals -->
+{% for product in products %}
+  <div class="modal fade" id="{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times"></i></span></button>
+          <h4 class="modal-title" id="myModalLabel">{{ product.name }}</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            {% if product.image %}
+              <div class="well col-md-12">
+                {% image product.image width-500 class="img-responsive center-block" %}
+              </div>
+            {% endif %}
+            {% if product.long_description %}
+              <div class="col-md-12">
+                <p>{{ product.long_description|richtext }}</p>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+<!-- Page Content -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <h3 class="page-header">Productos</h3>
+      </div>
+      <div class="col-md-12">
+        <form class="form-inline" action="" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="filter" class="sr-only">Busca por nombre o referencia</label>
+            <input type="text" class="form-control" placeholder="Busca por nombre o referencia" name="filter">
+            <input class="btn btn-default" type="submit" name="" value="Filtrar">
+          </div>
+        </form>
+      </div>
+      <div class="col-md-12"><br></div>
+      {% if products %}
+      <div class="col-md-12">
+        <nav aria-label="Product navigation">
+          <ul class="pagination">
+            <li>
+              <a href="?page=1" aria-label="Previous">
+                <span aria-hidden="true"><i class="fa fa-angle-double-left"></i></span>
+              </a>
+            </li>
+
+            {% if products.has_previous %}
+            <li>
+              <a href="?page={{ products.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+              </a>
+            </li>
+            {% endif %}
+
+            {% for page_num in products.paginator.page_range %}
+              <li {% if page_num == products.number %}class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+            {% endfor %}
+
+            {% if products.has_next %}
+            <li>
+              <a href="?page={{ products.next_page_number }}" aria-label="Next">
+                <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+              </a>
+            </li>
+            {% endif %}
+
+            <li>
+              <a href="?page={{ products.paginator.num_pages }}" aria-label="Previous">
+                <span aria-hidden="true"><i class="fa fa-angle-double-right"></i></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-striped table-hover table-bordered table-responsive">
+          <thead>
+            <tr>
+              <th>Referencia</th>
+              <th>Producto</th>
+              <th>Características</th>
+              <th>Precio</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in products %}
+              <tr>
+                <td>{{ product.reference }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.short_description|richtext }}</td>
+                <td>{{ product.price }}€</td>
+                <td>
+                  {% if product.image or product.long_description %}
+                    <button class="btn btn-default" data-toggle="modal" data-target="#{{ product.id }}">Detalles</a>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <div class="col-md-12">
+        <p>No se han encontrado productos.</p>
+      </div>
+      {% endif %}
+    </div>
+    <div class="col-md-12">
+      <div class="col-md-12">
+        <h3 class="page-header">Servicios</h3>
+      </div>
+      <div class="col-md-12">
+        <table class="table table-bordered table-responsive">
+            <thead>
+              <tr>
+                <th>
+                  Servicio
+                </th>
+                <th>
+                  Precio
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for service in self.services.all %}
+              <tr>
+                <td>{{ service.name }}</td>
+                <td>{{ service.price }} €/h</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /.container -->
+  
+{% endblock %}
+
+{% block extra_js %}  
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base/base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <!-- Contact Details Column -->
+                <h3 class="page-header">Detalles de contacto</h3>
+                <div class="col-md-12">
+                    <p>
+                        <i class="fa fa-map-marker"></i> <strong>Localización</strong>
+                        <p>{{ settings.base.CompanyInfoSettings.company_location }}</p>
+                    </p>
+                    <hr>
+                    <p>
+                        <i class="fa fa-phone"></i> <strong>Teléfonos</strong>
+                        {{ settings.base.CompanyInfoSettings.company_phones|richtext }}
+                    </p>
+                    <hr>
+                    <p>
+                        <i class="fa fa-clock-o"></i> <strong>Horario</strong>
+                        {{ settings.base.CompanyInfoSettings.company_opening_hours|richtext }}
+                    </p>
+                    <hr>
+                    <p>
+                        <ul class="list-unstyled list-inline list-social-icons">
+                            <li>
+                                <a href="{{ settings.base.CompanyInfoSettings.company_facebook_url }}"><i class="fa fa-facebook-square fa-2x"></i></a>
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        <iframe width="100%" height="400px" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps?hl=en&amp;ie=UTF8&amp;ll=37.0625,-95.677068&amp;spn=56.506174,79.013672&amp;t=m&amp;z=4&amp;output=embed"></iframe>
+                    </p>
+                </div>
+                <!-- Map Column -->
+
+            </div>
+
+            <!-- Contact Form -->
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <h3 class="page-header">Contacta con nosotros <small>Solicite su cita previa</small></h3>
+                {% include 'base/includes/form_page.html' %}
+            </div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+
+{% endblock content %}

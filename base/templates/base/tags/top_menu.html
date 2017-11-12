@@ -1,0 +1,44 @@
+{% load rmazaweb_tags wagtailcore_tags %}
+{% get_site_root as site_root %}
+
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Abrir navegación</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="{% pageurl site_root %}">
+        Reparaciones Maza
+      </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <form class="navbar-form navbar-right" action="{% slugurl 'catalogo' %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          <label class="sr-only" for="filter">Busca en el catálogo</label>
+          <input type="text" class="form-control" name="filter" placeholder="Busca en el Catálogo">
+          <button class="btn btn-default" type="submit">Buscar</button>
+        </div>
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        {% for menuitem in menuitems %}
+            <li class="{% if menuitem.show_dropdown %}dropdown{% endif %}{% if menuitem.active %} active{% endif %}">
+                {% if menuitem.show_dropdown %}
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">{{ menuitem.title }} <b class="caret"></b></a>
+                    {% top_menu_children parent=menuitem %}
+                {% else %}
+                    <a href="{% pageurl menuitem %}">{{ menuitem.title }}</a>
+                {% endif %}
+            </li>       
+        {% endfor %}
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container -->
+</nav>

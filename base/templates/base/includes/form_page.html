@@ -1,0 +1,27 @@
+{% load wagtailcore_tags %}
+
+<form action="{% pageurl page %}" method="POST" role="form">
+    {% csrf_token %}
+    {% if form.subject.errors %}
+        <ol role="alertdialog">
+        {% for error in form.subject.errors %}
+            <li role="alert"><strong>{{ error|escape }}</strong></li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+
+    <div class="form-group">
+        {% for field in form %}
+            <div aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+
+                <div>{{ field.label_tag }}{% if field.field.required %}*{% endif %}</div>
+
+                <div>{{ field }}</div>
+
+                <div><p class="help">{{ field.help_text|safe }}</p></div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div><input type="submit" value="Enviar"></div>
+</form>

@@ -1,0 +1,102 @@
+{% load static %}
+{% load wagtailcore_tags rmazaweb_tags wagtailuserbar %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
+    <meta name="author" content="Javier Triviño <kal3it@gmail.com>">
+
+    <title>
+        {% block title %}
+            {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+        {% endblock %}
+        {% block title_suffix %}
+            {% with self.get_site.site_name as site_name %}
+                {% if site_name %}- {{ site_name }}{% endif %}
+            {% endwith %}
+        {% endblock %}
+    </title>
+
+    <!-- Bootstrap Core CSS & Font Awesome -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/font-awesome-animation.min.css' %}">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="{% static 'base/css/bootstrap-theme.min.css' %}">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'base/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/footer.css' %}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    {% wagtailuserbar %}
+
+    {% block menu %}
+        {% get_site_root as site_root %}
+        {% top_menu parent=site_root calling_page=self %}
+    {% endblock %}
+
+    {% block content %}{% endblock %}
+
+  	<!-- Footer -->
+  	<footer class="container-fluid well">
+  	  <div class="container">
+
+          <div class="col-md-1"></div>
+          <div class="col-md-2 col-xs-6">
+            <h5><i class="fa fa-phone"></i> Teléfonos</h5>
+            {{ settings.base.CompanyInfoSettings.company_phones|richtext }}
+          </div>
+          <div class="col-md-3 col-xs-6">
+            <h5><i class="fa fa-clock-o"></i> Horario</h5>
+            {{ settings.base.CompanyInfoSettings.company_opening_hours|richtext }}
+          </div>
+          <div class="col-md-2 col-xs-6">
+            <h5><i class="fa fa-wrench"></i> Soporte</h5>
+            <ul>
+              <li><a href="{% slugurl 'contacto' %}">Contacto</a></li>
+              <li><a href="/sitemap.xml">Sitemap</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3 col-xs-6">
+            <h5><i class="fa fa-legal"></i> Legal</h5>
+            <ul>
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+            </ul>
+          </div>
+          <div class="col-md-1"></div>
+    		  <div class="col-md-12 col-xs-12 footer-copyright">
+            <br>
+    			  {{ settings.base.CompanyInfoSettings.company_name }} | Copyright© {% now "Y" %}, Todos los derechos reservados
+    		  </div>
+  	  </div>
+  	</footer>
+
+    <!-- jQuery -->
+    <script src="{% static 'base/js/jquery.min.js' %}"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static 'base/js/bootstrap.min.js' %}"></script>
+
+    {% block extra_js %}{% endblock %}
+
+</body>
+</html>
