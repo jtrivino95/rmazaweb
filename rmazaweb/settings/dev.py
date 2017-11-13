@@ -8,11 +8,4 @@ DEBUG = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '7pepm9wkl7d=bpbrych*o$k$&qrnha+f6_l9uk#lkguv*y0_on'
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
-try:
-    from .local import *
-except ImportError:
-    pass
