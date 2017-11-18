@@ -2,8 +2,6 @@
 *.sqlite3
 *.pyc
 *.log
-.env
-.vagrant
 static/
 media/
 TODO.txt
