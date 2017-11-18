@@ -8,6 +8,6 @@ COPY . .
 RUN pip install -r requirements.txt
 RUN ./manage.py collectstatic --noinput
 RUN ./manage.py migrate
-RUN ./manage.py loaddata initial_data.json
+RUN ./manage.py load_initial
 
 ENV UWSGI_INI /src/uwsgi.ini
