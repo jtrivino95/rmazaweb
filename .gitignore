@@ -5,6 +5,7 @@
 .env
 .vagrant
 static/
+media/
 TODO.txt
 rmazaweb/settings/production.py
 rmazaweb/settings/local.py
