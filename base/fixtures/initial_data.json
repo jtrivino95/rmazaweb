@@ -100,34 +100,6 @@
     }
 },
 {
-    "model": "catalog.catalogpageproduct",
-    "pk": 2,
-    "fields": {
-        "sort_order": 1,
-        "page": 5,
-        "reference": "00001",
-        "name": "Pene",
-        "short_description": "<h2>Renz es un</h2><p>gay<br/></p>",
-        "long_description": "",
-        "price": 999.55,
-        "image": 2
-    }
-},
-{
-    "model": "catalog.catalogpageproduct",
-    "pk": 3,
-    "fields": {
-        "sort_order": 2,
-        "page": 5,
-        "reference": "5678",
-        "name": "javi",
-        "short_description": "<p>comeme</p>",
-        "long_description": "<p>la polla de precio cm<br/></p>",
-        "price": 100.0,
-        "image": null
-    }
-},
-{
     "model": "wagtailforms.formsubmission",
     "pk": 1,
     "fields": {
@@ -261,7 +233,7 @@
 {
     "model": "wagtailcore.site",
     "fields": {
-        "hostname": "localhost",
+        "hostname": "reparacionesmaza.com",
         "port": 80,
         "site_name": "Reparaciones Maza S.L.",
         "root_page": 3,
@@ -1701,7 +1673,7 @@
     "pk": 1,
     "fields": {
         "site": [
-            "localhost",
+            "reparacionesmaza.com",
             80
         ],
         "default_per_page": 50
@@ -1712,7 +1684,7 @@
     "pk": 1,
     "fields": {
         "site": [
-            "localhost",
+            "reparacionesmaza.com",
             80
         ],
         "company_name": "Reparaciones Maza S.L.",
@@ -1836,12 +1808,12 @@
     "model": "auth.user",
     "fields": {
         "password": "pbkdf2_sha256$36000$GrgSQ1lahP23$EcjScK4jfu3sH8p3l6qUvMg/S3j6gIcwULBtus1HQTc=",
-        "last_login": "2017-11-18T17:28:42.071Z",
+        "last_login": "2017-11-18T17:39:56.522Z",
         "is_superuser": true,
         "username": "jtrivino",
         "first_name": "Javier",
         "last_name": "Trivi\u00f1o",
-        "email": "kal3it@gmail.com",
+        "email": "kald3v@gmail.com",
         "is_staff": true,
         "is_active": true,
         "date_joined": "2017-11-12T11:46:38.883Z",
@@ -2379,6 +2351,20 @@
     }
 },
 {
+    "model": "wagtailcore.pagerevision",
+    "pk": 16,
+    "fields": {
+        "page": 5,
+        "submitted_for_moderation": false,
+        "created_at": "2017-11-18T17:41:20.532Z",
+        "user": [
+            "jtrivino"
+        ],
+        "content_json": "{\"search_description\": \"\", \"owner\": 1, \"latest_revision_created_at\": \"2017-11-14T09:56:22.205Z\", \"go_live_at\": null, \"title\": \"Cat\\u00e1logo\", \"seo_title\": \"Cat\\u00e1logo\", \"draft_title\": \"Cat\\u00e1logo\", \"live\": true, \"last_published_at\": \"2017-11-14T09:56:22.702Z\", \"has_unpublished_changes\": false, \"numchild\": 0, \"content_type\": 14, \"show_in_menus\": true, \"services\": [{\"pk\": 1, \"price\": 19.99, \"sort_order\": 0, \"page\": 5, \"name\": \"Servicio de ejemplo\"}], \"path\": \"000100010001\", \"url_path\": \"/home/catalogo/\", \"expired\": false, \"slug\": \"catalogo\", \"locked\": false, \"pk\": 5, \"depth\": 3, \"products\": [{\"name\": \"Producto de ejemplo\", \"reference\": \"12345-ABC\", \"price\": 199.99, \"long_description\": \"<h4>En este cuadro se puede a\\u00f1adir informaci\\u00f3n extensa sobre el producto, m\\u00e1s detallada.<br/></h4><p>Este producto es un ejemplo para ense\\u00f1ar la funcionalidad de a\\u00f1adir productos.</p><ul><li>Se pueden tener tantos productos como uno desee</li><li>Se puede configurar cuantos productos ense\\u00f1ar por p\\u00e1gina mediante Settings &gt; Catalog settings</li><li>Usando el formulario superior y el ubicado en el navegador, se pueden filtrar los productos por nombre y referencia.</li></ul><p>A\\u00f1adir l\\u00edneas:</p><hr/>Documentos:<br/><a id=\\\"1\\\" linktype=\\\"document\\\">fujifilm_xt1_manual_es.pdf</a><br/><br/>Incluso v\\u00eddeos:<br/><embed embedtype=\\\"media\\\" url=\\\"https://www.youtube.com/watch?v=kffacxfA7G4\\\"/>\", \"sort_order\": 0, \"image\": 1, \"short_description\": \"<p>Este producto es un ejemplo para ense\\u00f1ar la funcionalidad de a\\u00f1adir productos.</p><ul><li>Se pueden tener tantos productos como uno desee</li><li>Se puede configurar cuantos productos ense\\u00f1ar por p\\u00e1gina mediante Settings &gt; Catalog settings</li><li>Usando el formulario superior y el ubicado en el navegador, se pueden filtrar los productos por nombre y referencia.<br/></li></ul>\", \"pk\": 1, \"page\": 5}], \"first_published_at\": \"2017-11-12T11:53:29.264Z\", \"expire_at\": null, \"live_revision\": 15}",
+        "approved_go_live_at": null
+    }
+},
+{
     "model": "wagtailcore.page",
     "pk": 1,
     "fields": {
@@ -2468,9 +2454,9 @@
         "expired": false,
         "locked": false,
         "first_published_at": "2017-11-12T11:53:29.264Z",
-        "last_published_at": "2017-11-14T09:56:22.702Z",
-        "latest_revision_created_at": "2017-11-14T09:56:22.205Z",
-        "live_revision": 15
+        "last_published_at": "2017-11-18T17:41:20.827Z",
+        "latest_revision_created_at": "2017-11-18T17:41:20.532Z",
+        "live_revision": 16
     }
 },
 {
