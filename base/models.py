@@ -58,6 +58,3 @@ class FormPage(AbstractEmailForm):
             FieldPanel('subject'),
         ], "Email"),
 ]
-
-class ContactPage(FormPage):
-    pass

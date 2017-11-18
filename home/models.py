@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from base.models import FormPage
 
 from modelcluster.fields import ParentalKey
 
@@ -13,10 +14,10 @@ from wagtail.wagtailadmin.edit_handlers import (
 )
 
 
-class HomePage(Page):
+class HomePage(FormPage):
     about = RichTextField()
 
-    content_panels = Page.content_panels + [
+    content_panels = FormPage.content_panels + [
         FieldPanel('about'),
         InlinePanel('slider_images', label="Slider Images"),
     ]
