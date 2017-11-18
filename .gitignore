@@ -1,9 +1,7 @@
-.idea
+.idea/
 *.sqlite3
 *.pyc
 *.log
 static/
 media/
 TODO.txt
-rmazaweb/settings/production.py
-rmazaweb/settings/local.py
