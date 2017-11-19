@@ -9,14 +9,14 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
-class BlogIndexPage(Page):
+class OfferIndexPage(Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [
         FieldPanel('intro', classname="full")
     ]
 
-class BlogPage(Page):
+class OfferPage(Page):
     body = RichTextField(blank=True, null=True)
     image = models.ForeignKey(
         'wagtailimages.Image', on_delete=models.SET_NULL,
