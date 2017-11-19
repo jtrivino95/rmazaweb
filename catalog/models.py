@@ -30,12 +30,15 @@ class CatalogPage(Page):
 
         if 'filter' in request.POST:
             filter_text = request.POST.get('filter')
-            filtered_products = CatalogPageProduct.objects.filter(
-                models.Q(reference__icontains=filter_text) |
-                models.Q(name__icontains=filter_text)
-            )
+        elif 'filter' in request.GET:
+            filter_text = request.GET.get('filter')
         else:
-            filtered_products = CatalogPageProduct.objects.all()
+            filter_text = ""
+
+        filtered_products = CatalogPageProduct.objects.filter(
+            models.Q(reference__icontains=filter_text) |
+            models.Q(name__icontains=filter_text)
+        )
 
         per_page = request.GET.get('per_page')
         if per_page is None:
