@@ -2,7 +2,7 @@ from __future__ import absolute_import, unicode_literals
 
 from django.db import models
 
-from blog.models import OfferPage
+from offers.models import OfferPage
 
 from modelcluster.fields import ParentalKey
 

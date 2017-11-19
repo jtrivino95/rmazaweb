@@ -75,7 +75,7 @@ class CatalogPageService(Orderable):
 class CatalogPageProduct(Orderable):
     page = ParentalKey(CatalogPage, related_name='products')
 
-    reference = models.CharField(max_length=255)
+    reference = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     short_description = RichTextField(null=True, blank=True)
     long_description = RichTextField(null=True, blank=True)
