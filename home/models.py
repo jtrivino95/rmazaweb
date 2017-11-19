@@ -1,16 +1,13 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
-from base.models import FormPage
 
-from modelcluster.fields import ParentalKey
+from base.models import FormPage
+from blog.models import BlogPage
 
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
-    InlinePanel
 )
 
 
@@ -19,17 +16,9 @@ class HomePage(FormPage):
 
     content_panels = FormPage.content_panels + [
         FieldPanel('about'),
-        InlinePanel('slider_images', label="Slider Images"),
     ]
 
-class HomePageGalleryImage(Orderable):
-    page = ParentalKey(HomePage, related_name='slider_images')
-    image = models.ForeignKey(
-        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
-    )
-    caption = models.CharField(blank=True, max_length=250)
-
-    panels = [
-        ImageChooserPanel('image'),
-        FieldPanel('caption'),
-    ]
+    def get_context(self, request, *args, **kwargs):
+        context = super(HomePage, self).get_context(request, *args, **kwargs)
+        context['offers']  = BlogPage.objects.filter(live=True)
+        return context

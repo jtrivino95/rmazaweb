@@ -1,0 +1,34 @@
+{% extends "base/base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<!-- Page Content -->
+<div class="container">
+    
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <h1 class="page-header">{{ page.title }}</h1>
+
+            <div class="row">
+                {% for blogpage in page.get_children %}
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    {% if blogpage.specific.image %}
+                        {% image blogpage.specific.image width-400 as imageattrs %}
+                        <a href="{{ blogpage.url }}"><img class="img-responsive img-rounded" src="{{ imageattrs.url }}" alt="{{ imageattrs.alt }}"></a>
+                    {% endif %}
+                    <p><a href="{{ blogpage.url }}">{{ blogpage.title }}</a></p>
+                    <hr>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.row -->
+<!-- /.container -->
+{% endblock %}

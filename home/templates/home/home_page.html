@@ -14,13 +14,19 @@
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
-            {% for slider_image in page.slider_images.all %}
+            {% for offer in offers %}
 
-                {% image slider_image.image height-500 as imageattrs %}
+                {% if offer.specific.image %}
+                    {% image offer.specific.image height-500 as imageattrs %}
+                {% endif %}
 
                 <div class="item {% if forloop.first %}active{% endif %}">
-                    <div class="fill" style="background-image:url('{{ imageattrs.url }}');"></div>
-                    <div class="carousel-caption"><h2>{{ slider_image.caption }}</h2></div>
+                    {% if offer.specific.image %}
+                        <div class="fill" style="background-image:url('{{ imageattrs.url }}');"></div>
+                    {% else %}
+                        <div class="fill" style="background-color:black;"></div>
+                    {% endif %}
+                    <div class="carousel-caption"><h2><a href="{{ offer.url }}">{{ offer.title }}</a></h2></div>
                 </div>
 
             {% endfor %}

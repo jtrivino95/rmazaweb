@@ -1,0 +1,36 @@
+{% extends "base/base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-lg-2"></div>
+
+            <!-- Blog Post Content Column -->
+            <div class="col-lg-8">
+
+                <h1 class="page-header">{{ page.title }}</h1>
+
+                {% if page.image %}
+                    {% image page.image width-750 as imageattrs %}
+                    <img class="center-block img-responsive img-rounded" src="{{ imageattrs.url }}" alt="{{ imageattrs.alt }}">
+                {% endif %}
+
+                <!-- Post Content -->
+                <p>{{ page.body|richtext}}</p>
+
+                <hr>
+
+                <p class="text-muted small"><i class="fa fa-clock-o"></i> Publicado el {{ page.last_published_at|date:"d \d\e F \d\e Y" }}</p>
+                
+            </div>
+
+            <div class="col-lg-2"></div>
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container -->
+{% endblock content %}

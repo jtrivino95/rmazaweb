@@ -8,37 +8,33 @@
         <div class="col-md-6 col-sm-12 col-xs-12">
             <!-- Contact Details Column -->
             <h3 class="page-header">Detalles de contacto</h3>
-            <div class="col-md-12">
-                <p>
-                    <i class="fa fa-map-marker"></i> <strong>Localización</strong>
-                    <p>{{ settings.base.CompanyInfoSettings.company_location }}</p>
-                </p>
-                <hr>
-                <p>
-                    <i class="fa fa-phone"></i> <strong>Teléfonos</strong>
-                    {{ settings.base.CompanyInfoSettings.company_phones|richtext }}
-                </p>
-                <hr>
-                <p>
-                    <i class="fa fa-clock-o"></i> <strong>Horario</strong>
-                    {{ settings.base.CompanyInfoSettings.company_opening_hours|richtext }}
-                </p>
-                <hr>
-                <p>
-                    <ul class="list-unstyled list-inline list-social-icons">
-                        <li>
-                            <a href="{{ settings.base.CompanyInfoSettings.company_facebook_url }}"><i class="fa fa-facebook-square fa-2x"></i></a>
-                        </li>
-                    </ul>
-                </p>
-                <p>
-                    <iframe height="450" width="100%" frameborder="0" style="border:0"
-                    src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJjURw1GAfQg0R51G2VZVJvEE&key=AIzaSyCXTzul7s_EmdXurOAGttKe5Tk6jOSJTKc"
-                    allowfullscreen></iframe>
-                </p>
-            </div>
-            <!-- Map Column -->
-
+            <p>
+                <i class="fa fa-map-marker"></i> <strong>Localización</strong>
+                <p>{{ settings.base.CompanyInfoSettings.company_location }}</p>
+            </p>
+            <hr>
+            <p>
+                <i class="fa fa-phone"></i> <strong>Teléfonos</strong>
+                {{ settings.base.CompanyInfoSettings.company_phones|richtext }}
+            </p>
+            <hr>
+            <p>
+                <i class="fa fa-clock-o"></i> <strong>Horario</strong>
+                {{ settings.base.CompanyInfoSettings.company_opening_hours|richtext }}
+            </p>
+            <hr>
+            <p>
+                <ul class="list-unstyled list-inline list-social-icons">
+                    <li>
+                        <a href="{{ settings.base.CompanyInfoSettings.company_facebook_url }}"><i class="fa fa-facebook-square fa-2x"></i></a>
+                    </li>
+                </ul>
+            </p>
+            <p>
+                <iframe height="450" width="100%" frameborder="0" style="border:0"
+                src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJjURw1GAfQg0R51G2VZVJvEE&key=AIzaSyCXTzul7s_EmdXurOAGttKe5Tk6jOSJTKc"
+                allowfullscreen></iframe>
+            </p>
         </div>
 
         <!-- Contact Form -->
