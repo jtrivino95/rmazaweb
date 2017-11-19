@@ -20,6 +20,8 @@ class CatalogSettings(BaseSetting):
     default_per_page = models.IntegerField(default=50)
 
 class CatalogPage(Page):
+    show_in_menus_default = True
+
     content_panels = Page.content_panels + [
         InlinePanel('products', label="Products"),
         InlinePanel('services', label="Services"),
@@ -93,3 +95,6 @@ class CatalogPageProduct(Orderable):
         FieldPanel('price'),
         ImageChooserPanel('image'),
     ]
+
+    def __str__(self):
+        return self.reference + " | " + self.name

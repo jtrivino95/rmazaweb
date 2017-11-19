@@ -12,7 +12,7 @@
             <h1 class="page-header">{{ page.title }}</h1>
 
             <div class="row">
-                {% for blogpage in page.get_children %}
+                {% for blogpage in page.get_children.live %}
 
                 <div class="col-md-4 col-sm-6 col-xs-12">
                     {% if blogpage.specific.image %}

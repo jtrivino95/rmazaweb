@@ -10,6 +10,8 @@ from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
 class OfferIndexPage(Page):
+    show_in_menus_default = True
+
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [

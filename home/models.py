@@ -8,12 +8,12 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
+from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
 from wagtail.wagtailadmin.edit_handlers import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,
     MultiFieldPanel,
-
 )
 
 
@@ -36,7 +36,7 @@ class HomePage(AbstractEmailForm):
 
     def get_context(self, request, *args, **kwargs):
         context = super(HomePage, self).get_context(request, *args, **kwargs)
-        context['offers']  = OfferPage.objects.filter(live=True)
+        context['offers']  = OfferPage.objects.live()
         return context
 
 class FormField(AbstractFormField):
