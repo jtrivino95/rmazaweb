@@ -9,15 +9,6 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel
 from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 
-class OfferIndexPage(Page):
-    show_in_menus_default = True
-
-    intro = RichTextField(blank=True)
-
-    content_panels = Page.content_panels + [
-        FieldPanel('intro', classname="full")
-    ]
-
 class OfferPage(Page):
     body = RichTextField(blank=True, null=True)
     image = models.ForeignKey(
@@ -29,3 +20,16 @@ class OfferPage(Page):
         FieldPanel('body', classname="full"),
         ImageChooserPanel('image'),
     ]
+
+    subpage_types = []
+
+class OfferIndexPage(Page):
+    show_in_menus_default = True
+
+    intro = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('intro', classname="full")
+    ]
+
+    subpage_types = [OfferPage]

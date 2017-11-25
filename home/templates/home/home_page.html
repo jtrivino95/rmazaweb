@@ -1,45 +1,44 @@
 {% extends "base/base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
 
-    <!-- Header Carousel -->
-    <header id="offers-carousel" class="carousel slide">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            {% for slider_image in page.slider_images.all %}
-                <li data-target="#offers-carousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
-            {% endfor %}
-        </ol>
+    {% if offers %}
+        <!-- Carousel -->
+        <div id="offers-carousel" class="carousel slide">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                {% for slider_image in page.slider_images.all %}
+                    <li data-target="#offers-carousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
+                {% endfor %}
+            </ol>
 
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            {% for offer in offers %}
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                {% for offer in offers %}
 
-                {% if offer.specific.image %}
-                    {% image offer.specific.image height-500 as imageattrs %}
-                {% endif %}
+                    <div class="item {% if forloop.first %}active{% endif %}">
+                        {% if offer.specific.image %}
+                            {% image offer.specific.image height-500 as imageattrs %}
+                            <div class="fill" style="background-image:url('{{ imageattrs.url }}');"></div>
+                        {% else %}
+                            <div class="fill" style="height: 500px; width: 100%; background-repeat: repeat; background-image:url('{% static 'home/img/blackpattern.jpg' %}');"></div>
+                        {% endif %}
+                        <div class="carousel-caption"><h2><a style="color: white" href="{{ offer.url }}">{{ offer.title }}</a></h2></div>
+                    </div>
 
-                <div class="item {% if forloop.first %}active{% endif %}">
-                    {% if offer.specific.image %}
-                        <div class="fill" style="background-image:url('{{ imageattrs.url }}');"></div>
-                    {% else %}
-                        <div class="fill" style="background-color:black;"></div>
-                    {% endif %}
-                    <div class="carousel-caption"><h2><a href="{{ offer.url }}">{{ offer.title }}</a></h2></div>
-                </div>
+                {% endfor %}
+            </div>
 
-            {% endfor %}
+            <!-- Controls -->
+            <a class="left carousel-control" href="#offers-carousel" data-slide="prev">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#offers-carousel" data-slide="next">
+                <span class="icon-next"></span>
+            </a>
         </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#offers-carousel" data-slide="prev">
-            <span class="icon-prev"></span>
-        </a>
-        <a class="right carousel-control" href="#offers-carousel" data-slide="next">
-            <span class="icon-next"></span>
-        </a>
-    </header>
+    {% endif %}
 
     <!-- Page Content -->
     {% include 'home/includes/about_page.html' %}

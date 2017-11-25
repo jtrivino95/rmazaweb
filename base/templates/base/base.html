@@ -1,16 +1,23 @@
 {% load static %}
 {% load wagtailcore_tags rmazaweb_tags wagtailuserbar %}
 
-<!DOCTYPE html>
-<html lang="es">
+<!-- Doctype HTML5 -->
+<!doctype html>
+<html lang="es" dir="ltr">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{% if self.search_description %}{{ self.search_description }}{% endif %}">
-    <meta name="author" content="Javier Triviño <kal3it@gmail.com>">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="description" content="{{ self.search_description }}">
+
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ self.url }}">
+    <meta property="og:title" content="{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}">
+    <meta property="og:image" content="">
+    <meta property="og:description" content="{{ self.description }}">
+    <meta property="og:site_name" content="{{ self.get_site.site_name }}">
+    <meta property="og:locale" content="es_ES">
 
     <title>
         {% block title %}
@@ -22,6 +29,9 @@
             {% endwith %}
         {% endblock %}
     </title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{% static 'base/favicon.ico' %}">
 
     <!-- Bootstrap Core CSS & Font Awesome -->
     <!-- Latest compiled and minified CSS -->

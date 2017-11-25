@@ -11,20 +11,24 @@
 
             <h1 class="page-header">{{ page.title }}</h1>
 
-            <div class="row">
-                {% for blogpage in page.get_children.live %}
+            {% if page.get_children.live %}
+                <div class="row">
+                    {% for offer in page.get_children.live %}
 
-                <div class="col-md-4 col-sm-6 col-xs-12">
-                    {% if blogpage.specific.image %}
-                        {% image blogpage.specific.image width-400 as imageattrs %}
-                        <a href="{{ blogpage.url }}"><img class="img-responsive img-rounded" src="{{ imageattrs.url }}" alt="{{ imageattrs.alt }}"></a>
-                    {% endif %}
-                    <p><a href="{{ blogpage.url }}">{{ blogpage.title }}</a></p>
-                    <hr>
+                    <div class="col-md-4 col-sm-6 col-xs-12">
+                        {% if offer.specific.image %}
+                            {% image offer.specific.image width-400 as imageattrs %}
+                            <a href="{{ offer.url }}"><img class="img-responsive img-rounded" src="{{ imageattrs.url }}" alt="{{ imageattrs.alt }}"></a>
+                        {% endif %}
+                        <p><a href="{{ offer.url }}">{{ offer.title }}</a></p>
+                        <hr>
+                    </div>
+
+                    {% endfor %}
                 </div>
-
-                {% endfor %}
-            </div>
+            {% else %}
+                <p>En estos momentos no tenemos promociones disponibles.</p>
+            {% endif %}
 
         </div>
 

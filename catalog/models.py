@@ -68,6 +68,8 @@ class CatalogPage(Page):
 
         return context
 
+    subpage_types = []
+
 class CatalogPageService(Orderable):
     page = ParentalKey(CatalogPage, related_name='services')
 
