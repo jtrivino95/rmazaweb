@@ -106,6 +106,7 @@ MEDIA_URL = '/media/'
 ADMINS = [
     ('Javier Trivino', 'kald3v@gmail.com'),
 ]
+
 MANAGERS = ADMINS
 
 EMAIL_SUBJECT_PREFIX = '[Reparaciones Maza Web] '

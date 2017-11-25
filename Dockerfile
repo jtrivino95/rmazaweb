@@ -1,13 +1,21 @@
-FROM tiangolo/uwsgi-nginx:python3.6
+FROM alpine
 
-ENV UWSGI_INI /src/uwsgi.ini
-ENV DJANGO_SETTINGS_MODULE rmazaweb.settings.production
+# Initialize
+RUN mkdir -p /data/web
+WORKDIR /data/web
+COPY requirements /data/web/requirements
+COPY requirements.txt /data/web/
 
-RUN mkdir /src
-WORKDIR /src
+# Setup
+RUN apk update
+RUN apk upgrade
+RUN apk add --update linux-headers python3 python3-dev postgresql-client postgresql-dev build-base gettext zlib libjpeg tiff-dev libwebp openjpeg musl-dev
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
-COPY . .
+# Clean
+RUN apk del -r python3-dev postgresql
 
-RUN pip install -r requirements.txt
-RUN ./manage.py collectstatic --noinput
-
+# Prepare
+COPY . /data/web/
+RUN mkdir -p /data/web/rmazaweb/static/admin
