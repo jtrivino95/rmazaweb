@@ -3,56 +3,40 @@ web:
     build: .
     expose:
         - "8000"
+    ports:
+        - "8000:8000"
     links:
         - postgres:postgres
         - redis:redis
-    environment:
-        DJANGO_SETTINGS_MODULE: rmazaweb.settings.production
-        DB_NAME: rmazaweb
-        DB_USER: rmazaweb
-        DB_PASS: rmazaweb
-        DB_SERVICE: postgres
-        DB_PORT: 5432
+    env_file: .env
     volumes:
-        - web:/data/web
+        - .:/code/
     command: /usr/bin/gunicorn rmazaweb.wsgi:application -w 2 -b :8000
 
 nginx:
     restart: always
-    build: nginx/
+    image: nginx:alpine
     ports:
         - "80:80"
     volumes_from:
         - web
+    volumes:
+        - ./nginx:/etc/nginx
     links:
         - web:web
 
 postgres:
     restart: always
-    image: postgres:latest
-    volumes_from:
-        - data
+    image: postgres
     volumes:
+        - ./postgres/data:/var/lib/postgresql/data
         - ./postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
-        - ./backups/postgresql:/backup
-    environment:
-        DB_NAME: rmazaweb
-        DB_USER: rmazaweb
-        DB_PASS: rmazaweb
-        DB_SERVICE: postgres
-        DB_PORT: 5432
+    env_file: .env
     expose:
         - "5432"
 
 redis:
     restart: always
-    image: redis:latest
+    image: redis
     expose:
         - "6379"
-
-data:
-    restart: always
-    image: alpine
-    volumes:
-        - /var/lib/postgresql
-    command: "true"

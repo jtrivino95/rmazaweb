@@ -1,7 +1,10 @@
-.idea/
 *.sqlite3
 *.pyc
 *.log
-static/
+.idea
 media/
+nginx/
+postgres/
+rmazaweb/static/
+.env
 TODO.txt
