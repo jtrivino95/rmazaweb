@@ -1,10 +1,9 @@
 *.sqlite3
 *.pyc
-*.log
-.idea
+.idea/
 media/
 nginx/
-postgres/
+postgres/data/
 rmazaweb/static/
 .env
 TODO.txt
