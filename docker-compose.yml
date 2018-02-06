@@ -6,8 +6,8 @@ services:
         build: .
         expose:
             - "8000"
-        ports:
-            - "8000:8000"
+        #ports:
+        #    - "8000:8000"
         links:
             - postgres:postgres
             - redis:redis

@@ -4,6 +4,6 @@
 media/
 nginx/
 postgres/data/
-rmazaweb/static/
+static/
 .env
 TODO.txt
