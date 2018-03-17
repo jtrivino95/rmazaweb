@@ -16,7 +16,7 @@ else:
     SECRET_KEY = ''.join([random.SystemRandom().choice(string.printable) for i in range(50)])
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
-ALLOWED_HOSTS = ['reparacionesmaza.com', 'localhost']
+ALLOWED_HOSTS = ['reparacionesmaza.com', 'localhost', '151.182.218.214']
 
 if 'DB_NAME' in os.environ:
     # Running the Docker image
