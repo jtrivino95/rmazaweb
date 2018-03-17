@@ -1,37 +1,29 @@
 version: "3"
 
 services:
-    web:
+    app:
         restart: always
         build: .
         expose:
             - "8000"
-        #ports:
-        #    - "8000:8000"
-        links:
-            - postgres:postgres
-            - redis:redis
         env_file: .env
         volumes:
             - .:/code/
-        depends_on:
-            - "postgres"
-        command: sh -c "python3 manage.py migrate && /usr/bin/gunicorn rmazaweb.wsgi:application -w 2 -b :8000"
+        command: sh -c "/usr/bin/gunicorn rmazaweb.wsgi:application -w 2 -b :8000"
 
-    nginx:
+    web:
         restart: always
         image: nginx:alpine
         ports:
             - "80:80"
+            - "443:443"
+        env_file: .env
         volumes:
-            - .:/code/
+            - ./static/:/code/static/
+            - ./media/:/code/media/
             - ./nginx:/etc/nginx
-        links:
-            - web:web
-        depends_on:
-            - "web"
 
-    postgres:
+    db:
         restart: always
         image: postgres:alpine
         volumes:
@@ -40,8 +32,6 @@ services:
         env_file: .env
         expose:
             - "5432"
-        depends_on:
-            - "redis"
 
     redis:
         restart: always
