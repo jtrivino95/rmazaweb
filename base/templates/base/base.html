@@ -46,6 +46,8 @@
     <link rel="stylesheet" href="{% static 'base/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'base/css/footer.css' %}">
 
+    {% block extra_css %}{% endblock %}
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -89,7 +91,7 @@
           </div>
           <div class="col-md-1 col-xs-12"></div>
           <div class="col-md-12 footer-copyright">
-              <p>{{ settings.base.CompanyInfoSettings.company_name }}, CIF {{ settings.base.CompanyInfoSettings.cif }} | Copyright© {% now "Y" %}, Todos los derechos reservados</p>
+              <p>{{ settings.base.CompanyInfoSettings.company_name }}, CIF {{ settings.base.CompanyInfoSettings.company_cif }} | Copyright© {% now "Y" %}, Todos los derechos reservados</p>
           </div>
 
   	  </div>
