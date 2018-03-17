@@ -36,11 +36,11 @@
   <div class="row">
     <div class="col-md-12">
       <div class="col-md-12">
-        <h3 class="page-header">Productos</h3>
+        <h1 class="page-header">Productos</h1>
       </div>
+      {% if products %}
       <div class="col-md-12">
-        <form class="form-inline" action="" method="post">
-          {% csrf_token %}
+        <form class="form-inline" action="" method="get">
           <div class="form-group">
             <label for="filter" class="sr-only">Busca por nombre o referencia</label>
             <input type="text" class="form-control" placeholder="Busca por nombre o referencia" name="filter">
@@ -50,7 +50,6 @@
         </form>
       </div>
       <div class="col-md-12"><br></div>
-      {% if products %}
       <div class="col-md-12">
         <nav aria-label="Product navigation">
           <ul class="pagination">
@@ -60,25 +59,9 @@
               </a>
             </li>
 
-            {% if products.has_previous %}
-            <li>
-              <a href="?page={{ products.previous_page_number }}" aria-label="Previous">
-                <span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-              </a>
-            </li>
-            {% endif %}
-
             {% for page_num in products.paginator.page_range %}
               <li {% if page_num == products.number %}class="active"{% endif %}><a href="?page={{ page_num }}">{{ page_num }}</a></li>
             {% endfor %}
-
-            {% if products.has_next %}
-            <li>
-              <a href="?page={{ products.next_page_number }}" aria-label="Next">
-                <span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-              </a>
-            </li>
-            {% endif %}
 
             <li>
               <a href="?page={{ products.paginator.num_pages }}" aria-label="Previous">
@@ -118,36 +101,9 @@
       </div>
       {% else %}
       <div class="col-md-12">
-        <p>No se han encontrado productos.</p>
+        <p>No se ha encontrado ningún producto.</p>
       </div>
       {% endif %}
-    </div>
-    <div class="col-md-12">
-      <div class="col-md-12">
-        <h3 class="page-header">Servicios</h3>
-      </div>
-      <div class="col-md-12">
-        <table class="table table-bordered table-responsive">
-            <thead>
-              <tr>
-                <th>
-                  Servicio
-                </th>
-                <th>
-                  Precio
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for service in self.services.all %}
-              <tr>
-                <td>{{ service.name }}</td>
-                <td>{{ service.price }} €/h</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-      </div>
     </div>
   </div>
 </div>

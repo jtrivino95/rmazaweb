@@ -19,65 +19,32 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 class CatalogSettings(BaseSetting):
     default_per_page = models.IntegerField(default=50)
 
-class CatalogPage(Page):
+
+class ServiceIndexPage(Page):
     show_in_menus_default = True
 
     content_panels = Page.content_panels + [
-        InlinePanel('products', label="Products"),
-        InlinePanel('services', label="Services"),
+        InlinePanel('services', label="Servicios"),
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        context = super(CatalogPage, self).get_context(request)
 
-        if 'filter' in request.POST:
-            filter_text = request.POST.get('filter')
-        elif 'filter' in request.GET:
-            filter_text = request.GET.get('filter')
-        else:
-            filter_text = ""
+class ProductIndexPage(Page):
+    show_in_menus_default = True
 
-        filtered_products = CatalogPageProduct.objects.filter(
-            models.Q(reference__icontains=filter_text) |
-            models.Q(name__icontains=filter_text)
-        )
+    content_panels = Page.content_panels + [
+        InlinePanel('products', label="Productos"),
+    ]
 
-        per_page = request.GET.get('per_page')
-        if per_page is None:
-            default_per_page = CatalogSettings.for_site(request.site).default_per_page
-            paginator = Paginator(filtered_products, per_page=default_per_page)
-        else:
-            paginator = Paginator(filtered_products, per_page=per_page)
 
-        page = request.GET.get('page')
-        try:
-            paginator.validate_number(page)
-        except PageNotAnInteger:
-            # If page is not an integer, deliver first page.
-            print('NOT AN INTEGER')
-            page = 1
-        except EmptyPage:
-            print('EMPTY PAGE')
-            # If page is out of range (e.g. 9999), deliver last page of results.
-            page = paginator.num_pages
+class Service(Orderable):
+    page = ParentalKey(ServiceIndexPage, related_name='services')
 
-        # make the variable 'resources' available on the template
-        print(page)
-        products = paginator.page(page)
-        context['products'] = products
+    name = models.CharField(max_length=255, verbose_name='Nombre')
+    price = models.FloatField(verbose_name='Precio')
 
-        return context
 
-    subpage_types = []
-
-class CatalogPageService(Orderable):
-    page = ParentalKey(CatalogPage, related_name='services')
-
-    name = models.CharField(max_length=255)
-    price = models.FloatField()
-
-class CatalogPageProduct(Orderable):
-    page = ParentalKey(CatalogPage, related_name='products')
+class Product(Orderable):
+    page = ParentalKey(ProductIndexPage, related_name='products')
 
     reference = models.CharField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
@@ -97,6 +64,3 @@ class CatalogPageProduct(Orderable):
         FieldPanel('price'),
         ImageChooserPanel('image'),
     ]
-
-    def __str__(self):
-        return self.reference + " | " + self.name
