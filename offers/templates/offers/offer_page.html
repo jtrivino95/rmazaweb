@@ -15,12 +15,13 @@
                 <h1 class="page-header">{{ page.title }}</h1>
 
                 {% if page.image %}
-                    {% image page.image width-750 as imageattrs %}
-                    <img class="center-block img-responsive img-rounded" src="{{ imageattrs.url }}" alt="{{ imageattrs.alt }}">
+                    {% image page.image original class="img-responsive img-rounded" %}
+                {% else %}
+                    {% image settings.offers.OffersSettings.default_offer_image original class="img-responsive img-rounded" %}
                 {% endif %}
 
                 <!-- Post Content -->
-                <p>{{ page.body|richtext}}</p>
+                <p>{{ page.body|richtext }}</p>
 
                 <hr>
 

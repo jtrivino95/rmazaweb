@@ -4,36 +4,33 @@
 {% block content %}
 <!-- Page Content -->
 <div class="container">
-    
     <div class="row">
-
         <div class="col-md-12">
-
             <h1 class="page-header">{{ page.title }}</h1>
 
             {% if page.get_children.live %}
                 <div class="row">
                     {% for offer in page.get_children.live %}
 
+                    <a href="{{ offer.url }}">
                     <div class="col-md-4 col-sm-6 col-xs-12">
                         {% if offer.specific.image %}
-                            {% image offer.specific.image width-400 as imageattrs %}
-                            <a href="{{ offer.url }}"><img class="img-responsive img-rounded" src="{{ imageattrs.url }}" alt="{{ imageattrs.alt }}"></a>
+                            {% image offer.specific.image fill-400x400 class="img-responsive img-rounded" %}
+                        {% else %}
+                            {% image settings.offers.OffersSettings.default_offer_image fill-400x400 class="img-responsive img-rounded" %}
                         {% endif %}
-                        <p><a href="{{ offer.url }}">{{ offer.title }}</a></p>
+                        <p>{{ offer.title }}</p>
                         <hr>
                     </div>
+                    </a>
 
                     {% endfor %}
                 </div>
             {% else %}
                 <p>En estos momentos no tenemos promociones disponibles.</p>
             {% endif %}
-
         </div>
-
     </div>
-    
 </div>
     <!-- /.row -->
 <!-- /.container -->

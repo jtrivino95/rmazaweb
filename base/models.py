@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from wagtail.wagtailcore.fields import RichTextField
+from wagtail.core.fields import RichTextField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from modelcluster.fields import ParentalKey
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailforms.models import AbstractEmailForm, AbstractFormField
-from wagtail.wagtailforms.edit_handlers import FormSubmissionsPanel
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.core.fields import RichTextField
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.forms.edit_handlers import FormSubmissionsPanel
+from wagtail.admin.edit_handlers import (
     FieldPanel,
     FieldRowPanel,
     InlinePanel,

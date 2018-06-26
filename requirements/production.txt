@@ -1,5 +1,0 @@
--r base.txt
-redis
-django-redis
-gunicorn
-psycopg2-binary

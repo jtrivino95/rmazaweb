@@ -1,17 +1,20 @@
-FROM alpine
+FROM python:3.6
+LABEL maintainer="kald3v@gmail.com"
 
-# Initialize
-RUN mkdir -p /code
-WORKDIR /code
-COPY requirements /code/requirements
-COPY requirements.txt /code/
+ENV DJANGO_ENV prod
 
-# Setup
-RUN apk update
-RUN apk upgrade
-RUN apk add --update linux-headers python3 python3-dev postgresql-client postgresql-dev build-base gettext zlib libjpeg tiff-dev libwebp openjpeg musl-dev
-RUN pip3 install --upgrade pip
-RUN pip3 install -r requirements.txt
+COPY ./requirements.txt /code/requirements.txt
+RUN pip install -r /code/requirements.txt
+RUN pip install gunicorn
 
-# Clean
-RUN apk del -r python3-dev postgresql
+COPY . /code/
+WORKDIR /code/
+
+RUN python manage.py migrate
+
+RUN useradd wagtail
+RUN chown -R wagtail /code
+USER wagtail
+
+EXPOSE 8000
+CMD exec gunicorn rmazaweb.wsgi:application --bind 0.0.0.0:8000 --workers 3

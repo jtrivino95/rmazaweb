@@ -7,43 +7,6 @@
 
 {% block content %}
 
-    {% if offers %}
-        <!-- Carousel -->
-        <div id="offers-carousel" class="carousel slide">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                {% for slider_image in page.slider_images.all %}
-                    <li data-target="#offers-carousel" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %}active{% endif %}"></li>
-                {% endfor %}
-            </ol>
-
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                {% for offer in offers %}
-
-                    <div class="item {% if forloop.first %}active{% endif %}">
-                        {% if offer.specific.image %}
-                            {% image offer.specific.image height-500 as imageattrs %}
-                            <div class="fill" style="height: 500px; width: 100%; background: white url('{{ imageattrs.url }}') no-repeat fixed center;"></div>
-                        {% else %}
-                            <div class="fill" style="height: 500px; width: 100%; background: black url('{% static 'home/img/blackpattern.jpg' %}') no-repeat fixed center;"></div>
-                        {% endif %}
-                        <div class="carousel-caption"><h2><a style="color: black; text-shadow: 0px;" href="{{ offer.url }}">{{ offer.title }}</a></h2></div>
-                    </div>
-
-                {% endfor %}
-            </div>
-
-            <!-- Controls -->
-            <a class="left carousel-control" href="#offers-carousel" data-slide="prev">
-                <span class="icon-prev"></span>
-            </a>
-            <a class="right carousel-control" href="#offers-carousel" data-slide="next">
-                <span class="icon-next"></span>
-            </a>
-        </div>
-    {% endif %}
-
     <!-- Page Content -->
     {% include 'home/includes/about_page.html' %}
     {% include 'home/includes/contact_page.html' %}

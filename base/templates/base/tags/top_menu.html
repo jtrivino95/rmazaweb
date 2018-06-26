@@ -19,11 +19,10 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <form class="navbar-form navbar-right" action="{% slugurl 'catalogo' %}" method="post">
-        {% csrf_token %}
+      <form class="navbar-form navbar-right" action="{% slugurl 'catalogo' %}" method="get">
         <div class="form-group">
-          <label class="sr-only" for="filter">Busca en el catálogo</label>
-          <input type="text" class="form-control" name="filter" placeholder="Busca en el Catálogo">
+          <label class="sr-only" for="filter">Busca un producto</label>
+          <input type="text" class="form-control" name="filter" placeholder="Busca un producto">
           <button class="btn btn-default" type="submit">Buscar</button>
         </div>
       </form>

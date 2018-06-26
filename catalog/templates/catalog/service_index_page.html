@@ -7,31 +7,21 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="col-md-12">
-        <h1 class="page-header">Servicios</h1>
-      </div>
-      <div class="col-md-12">
-        {% if self.services.all %}
-        <table class="table table-bordered table-responsive">
-          <thead>
-            <tr>
-              <th>Servicio</th>
-              <th>Precio</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for service in self.services.all %}
-            <tr>
-              <td>{{ service.name }}</td>
-              <td>{{ service.price }} €/h</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% else %}
-          <p>En estos momentos no existen servicios publicados.</p>  
-        {% endif %}   
-      </div>
+      <h1 class="page-header">Servicios</h1>
+      {% if self.services.all %}
+        <table class="table  table-responsive">
+        <tbody>
+          {% for service in self.services.all %}
+          <tr>
+            <td>{{ service.name }}</td>
+            <td>{{ service.price }} {{ service.units }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+        <p>En estos momentos no existen servicios publicados.</p>
+      {% endif %}
     </div>
   </div>
 </div>
