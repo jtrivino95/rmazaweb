@@ -61,7 +61,7 @@
                 {% endif %}
                 <h3><b>{{ product.name }}</b> <small>Ref: <i>{{ product.reference }}</i></small></h3>
                 <h4>{{ product.price }} €</h4>
-                <p class="description">{{ product.short_description }}</p>
+                <p class="description">{{ product.short_description|richtext }}</p>
             </div>
         {% endfor %}
     {% else %}

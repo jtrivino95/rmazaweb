@@ -18,7 +18,7 @@ class OffersSettings(BaseSetting):
         related_name='+', null=True, blank=True
     )
     panels = [
-        ImageChooserPanel('default_product_image'),
+        ImageChooserPanel('default_offer_image'),
     ]
 
 
