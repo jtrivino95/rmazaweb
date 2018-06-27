@@ -1,4 +1,5 @@
 {% load wagtailcore_tags %}
+{% load rmazaweb_tags %}
 
 <form action="{% pageurl page %}" method="POST" role="form">
     {% csrf_token %}
@@ -12,16 +13,16 @@
 
     <div class="form-group">
         {% for field in form %}
-            <div aria-required={% if field.field.required %}"true"{% else %}"false"{% endif %}>
+            <div aria-required={{ field.field.required }}>
 
                 <div>{{ field.label_tag }}{% if field.field.required %}*{% endif %}</div>
 
-                <div>{{ field }}</div>
+                <div>{{ field|addcss:"form-control" }}</div>
 
                 <div><p class="help">{{ field.help_text|safe }}</p></div>
             </div>
         {% endfor %}
     </div>
 
-    <div><input type="submit" value="Enviar"></div>
+    <div><input type="submit" class="btn btn-primary" value="Enviar"></div>
 </form>

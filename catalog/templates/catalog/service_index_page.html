@@ -9,11 +9,11 @@
     <div class="col-md-12">
       <h1 class="page-header">Servicios</h1>
       {% if self.services.all %}
-        <table class="table  table-responsive">
+        <table class="table  table-responsive table-bordered">
         <tbody>
           {% for service in self.services.all %}
           <tr>
-            <td>{{ service.name }}</td>
+            <td><b>{{ service.name }}</b></td>
             <td>{{ service.price }} {{ service.units }}</td>
           </tr>
           {% endfor %}
