@@ -42,21 +42,6 @@ class ProductIndexPage(Page):
         InlinePanel('products', label="Productos"),
     ]
 
-    def get_context(self, request, *args, **kwargs):
-        context = super(ProductIndexPage, self).get_context(request)
-
-        if 'filter' in request.GET:
-            filter_text = request.GET.get('filter')
-        else:
-            filter_text = ""
-
-        context['self'].products = context['self'].products.filter(
-            models.Q(reference__icontains=filter_text) |
-            models.Q(name__icontains=filter_text)
-        )
-
-        return context
-
 
 class Service(Orderable):
     page = ParentalKey(ServiceIndexPage, related_name='services')

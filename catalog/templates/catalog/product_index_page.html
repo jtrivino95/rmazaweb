@@ -36,24 +36,18 @@
 {% endfor %}
 
 <!-- Page Content -->
-<div class="container">
+<div id="app" class="container">
     <h1 class="page-header">Productos</h1>
     <div class="row">
-        <div class="col-md-12">
-            <form class="form-inline" action="" method="get">
-                <div class="form-group">
-                    <label for="filter" class="sr-only">Busca por nombre o referencia</label>
-                    <input type="text" class="form-control" placeholder="Busca por nombre o referencia" name="filter">
-                    <input type="submit" class="btn btn-primary" value="Buscar">
-                </div>
-            </form>
+        <div class="col-md-4">
+            <input v-model="search" type="text" class="form-control" placeholder="Busca por nombre o referencia" name="filter">
         </div>
     </div>
     <br>
     <div class="row">
     {% if self.products.all %}
         {% for product in self.products.all %}
-            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 product-tile" data-toggle="modal" data-target="#{{ product.id }}">
+            <div v-show="'{{ product.reference }}'.toLowerCase().includes(search) || '{{ product.name }}'.toLowerCase().includes(search)" class="col-sm-12 col-md-6 col-lg-4 col-xl-3 product-tile" data-toggle="modal" data-target="#{{ product.id }}">
                 {% if product.image %}
                     {% image product.image fill-360x240 class="thumbnail" %}
                 {% else %}
@@ -65,7 +59,7 @@
             </div>
         {% endfor %}
     {% else %}
-        <p>No se ha encontrado ningún producto.</p>
+        <p>No existe ningún producto publicado en este momento.</p>
     {% endif %}
     </div>
 </div>
@@ -73,5 +67,14 @@
   
 {% endblock %}
 
-{% block extra_js %}  
+{% block extra_js %}
+<script>
+    var app = new Vue({
+      delimiters: ["[[", "]]"],
+      el: '#app',
+      data: {
+        search: "{{ request.GET.search }}",
+      }
+    })
+</script>
 {% endblock %}
