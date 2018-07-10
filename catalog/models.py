@@ -1,6 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.db import models
+from rest_framework import fields as api_fields
 
 from modelcluster.fields import ParentalKey
 
@@ -12,6 +13,7 @@ from wagtail.core.fields import RichTextField
 from wagtail.core.models import Page, Orderable
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.api import APIField
 
 
 @register_setting
@@ -34,12 +36,20 @@ class ServiceIndexPage(Page):
         InlinePanel('services', label="Servicios"),
     ]
 
+import rest_framework.serializers as api_serializers
+class ProductSerializer(api_serializers.Serializer):
+    pass
 
 class ProductIndexPage(Page):
     show_in_menus_default = True
 
     content_panels = Page.content_panels + [
         InlinePanel('products', label="Productos"),
+    ]
+
+    # Export fields over the API
+    api_fields = [
+        APIField('products'),
     ]
 
 
@@ -64,6 +74,8 @@ class Product(Orderable):
         related_name='+', null=True, blank=True, verbose_name="Imagen del producto"
     )
 
+    # All FieldPanel are defined because ImageChooserPanel is not rendered automatically,
+    # so it must be explicitly written, and so all the other fields.
     panels = [
         FieldPanel('reference'),
         FieldPanel('name'),
@@ -71,4 +83,10 @@ class Product(Orderable):
         FieldPanel('long_description'),
         FieldPanel('price'),
         ImageChooserPanel('image'),
+    ]
+
+    # Export fields over the API
+    api_fields = [
+        APIField('reference'),
+        APIField('name'),
     ]
