@@ -54,14 +54,14 @@ class Service(Orderable):
 class Product(Orderable):
     page = ParentalKey(ProductIndexPage, related_name='products')
 
-    reference = models.CharField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
-    short_description = RichTextField(null=True, blank=True)
-    long_description = RichTextField(null=True, blank=True)
-    price = models.FloatField()
+    reference = models.CharField(max_length=255, unique=True, verbose_name="Referencia")
+    name = models.CharField(max_length=255, verbose_name="Nombre")
+    short_description = RichTextField(null=True, blank=True, verbose_name="Descripción corta")
+    long_description = RichTextField(null=True, blank=True, verbose_name="Descripción larga")
+    price = models.FloatField(verbose_name="Precio")
     image = models.ForeignKey(
         'wagtailimages.Image', on_delete=models.CASCADE,
-        related_name='+', null=True, blank=True
+        related_name='+', null=True, blank=True, verbose_name="Imagen del producto"
     )
 
     panels = [
