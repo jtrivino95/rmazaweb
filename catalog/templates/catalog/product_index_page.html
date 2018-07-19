@@ -47,7 +47,11 @@
     <div class="row">
     {% if self.products.all %}
         {% for product in self.products.all %}
-            <div v-show="'{{ product.reference }}'.toLowerCase().includes(search) || '{{ product.name }}'.toLowerCase().includes(search)" class="col-sm-12 col-md-6 col-lg-4 col-xl-3 product-tile" data-toggle="modal" data-target="#{{ product.id }}">
+            <div v-show="
+                    '{{ product.reference }} {{ product.name }}'.toLowerCase().includes(search) ||
+                    '{{ product.reference }} {{ product.name }}'.includes(search)
+                "
+                 class="col-sm-12 col-md-6 col-lg-4 col-xl-3 product-tile" data-toggle="modal" data-target="#{{ product.id }}">
                 {% if product.image %}
                     {% image product.image fill-360x240 class="thumbnail" %}
                 {% else %}
