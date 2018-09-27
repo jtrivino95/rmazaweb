@@ -16,9 +16,9 @@ import os
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+ADMINS = [
+    ('Javier Trivino', 'kald3v@gmail.com'),
+]
 
 
 # Application definition
@@ -94,16 +94,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rmazaweb.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -141,29 +131,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
-
-STATICFILES_DIRS = [
-    os.path.join(PROJECT_DIR, 'static'),
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.getenv('STATIC_ROOT', '')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', '')
 MEDIA_URL = '/media/'
 
-ADMINS = [
-    ('Javier Trivino', 'kald3v@gmail.com'),
-]
 
 # Wagtail settings
 
 WAGTAIL_SITE_NAME = "rmazaweb"
 
+
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
+
 BASE_URL = 'http://reparacionesmaza.com'

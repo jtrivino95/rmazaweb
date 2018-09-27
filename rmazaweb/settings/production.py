@@ -4,11 +4,11 @@ DEBUG = False
 
 SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
-ALLOWED_HOSTS = ['reparacionesmaza.com']
+ALLOWED_HOSTS = ['reparacionesmaza.com', 'localhost']  # TODO remove localhost
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': os.environ['DB_ENGINE'],
         'NAME': os.environ['DB_NAME'],
         'USER': os.environ['DB_USER'],
         'PASSWORD': os.environ['DB_PASS'],
