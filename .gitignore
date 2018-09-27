@@ -1,6 +1,5 @@
 *.pyc
 .idea/
-nginx/
-postgres/data/
 .env
+*.sqlite
 TODO.txt
